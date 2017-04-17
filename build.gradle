@@ -1,7 +1,20 @@
+/**
+ * Build configuration script for the project
+ */
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+/**
+ * This buildScript block determines which plugins, task classes, and other classes are available for use in the rest of the build script.
+ * It defines the project and its tasks. If you additionally want to use third-party plugins, task classes, or other classes (in the build script!),
+ * you have to specify the corresponding dependencies in the buildScript block.
+ */
 buildscript {
 	ext {
 		springBootVersion = '1.5.3.BUILD-SNAPSHOT'
 	}
+
 	repositories {
 		mavenCentral()
 		maven { url "https://repo.spring.io/snapshot" }
@@ -12,20 +25,51 @@ buildscript {
 	}
 }
 
+/**
+ * The Java plugin adds Java compilation along with testing and bundling capabilities to a project.
+ * It serves as the basis for many of the other Gradle plugins.
+ */
 apply plugin: 'java'
+
+/**
+ * The IDEA plugin generates files that are used by IntelliJ IDEA, thus making it possible to open the project
+ * from IDEA (File - Open Project).Both external dependencies (including associated source and Javadoc files)
+ * and project dependencies are considered.
+ */
+apply plugin: 'idea'
+
+/**
+ * The Eclipse plugins generate files that are used by the Eclipse IDE,
+ * thus making it possible to import the project into Eclipse (File - Import... - Existing Projects into Workspace).
+ */
 apply plugin: 'eclipse'
+
+/**
+ * This Spring-Boot plugin makes it easy to create stand-alone, production-grade Spring based Applications that can you can "just run".
+ * We take an opinionated view of the Spring platform and third-party libraries so you can get started with minimum fuss.
+ * Most Spring Boot applications need very little Spring configuration.
+ */
 apply plugin: 'org.springframework.boot'
 
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
-
+/**
+ * While adding external dependencies, Gradle looks for them in a repository. A repository is just a collection of files,
+ * organized by group, name and version. By default, Gradle does not define any repositories.
+ * We have to define at least one repository explicitly e.g. 'mavenCentral()' is a maven repository
+ */
 repositories {
 	mavenCentral()
 	maven { url "https://repo.spring.io/snapshot" }
 	maven { url "https://repo.spring.io/milestone" }
 }
 
-
+/**
+ * Dependency configuration defines a set of dependencies. You can use this feature to declare external dependencies,
+ * which you want to download from the web. This defines the following different standard configurations:
+ * - Compile − The dependencies required to compile the production source of the project.
+ * - Runtime − The dependencies required by the production classes at runtime. By default, also includes the compile time dependencies.
+ * - Test Compile − The dependencies required to compile the test source of the project. By default, it includes compiled production classes and the compile time dependencies.
+ * - Test Runtime − The dependencies required to run the tests. By default, it includes runtime and test compile dependencies.
+ */
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
