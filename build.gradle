@@ -2,9 +2,6 @@
  * Build configuration script for the project
  */
 
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
-
 /**
  * This buildScript block determines which plugins, task classes, and other classes are available for use in the rest of the build script.
  * It defines the project and its tasks. If you additionally want to use third-party plugins, task classes, or other classes (in the build script!),
@@ -30,6 +27,8 @@ buildscript {
  * It serves as the basis for many of the other Gradle plugins.
  */
 apply plugin: 'java'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
 
 /**
  * The IDEA plugin generates files that are used by IntelliJ IDEA, thus making it possible to open the project
@@ -71,6 +70,13 @@ repositories {
  * - Test Runtime − The dependencies required to run the tests. By default, it includes runtime and test compile dependencies.
  */
 dependencies {
+	//Starter for building web, including RESTful, applications using Spring MVC. Uses Tomcat as the default embedded container
 	compile('org.springframework.boot:spring-boot-starter-web')
+
+	//Starter for testing Spring Boot applications with libraries including JUnit, Hamcrest and Mockito
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'	//Cucumber-JVM
+	testCompile group: 'info.cukes', name: 'cucumber-core', version: '1.2.5'
+	testCompile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'	//JUnit and Cucumber testing
+	testCompile group: 'info.cukes', name: 'cucumber-spring', version: '1.2.5'	//Spring and Cucumber
 }
